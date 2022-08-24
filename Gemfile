@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-gem "rspec"
+gem 'rspec'
 
-gem "pry"
+gem 'pry'
 
-gem "simplecov", require: false, group: :test
+gem 'simplecov', require: false, group: :test

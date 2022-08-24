@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# a node within a bst
 class TreeNode
   attr_accessor :score, :title, :left, :right
 
@@ -7,5 +10,4 @@ class TreeNode
     @left = nil
     @right = nil
   end
-
 end
