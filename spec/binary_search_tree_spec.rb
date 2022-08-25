@@ -22,6 +22,17 @@ RSpec.describe BinarySearchTree do
       expect(tree.root.score).to eq(50)
       expect(tree.root.title).to eq('Hannibal Buress: Animal Furnace')
     end
+
+    it 'adds two scores and titles' do
+      tree.insert(50, 'Hannibal Buress: Animal Furnace')
+      tree.insert(61, "Bill & Ted's Excellent Adventure")
+
+      expect(tree.root.score).to eq(50)
+      expect(tree.root.title).to eq('Hannibal Buress: Animal Furnace')
+      expect(tree.root.right.score).to eq(61)
+      expect(tree.root.right.title).to eq("Bill & Ted's Excellent Adventure")
+      expect(tree.root.left.score).to eq(nil)
+    end
   end
 
 end

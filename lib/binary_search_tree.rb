@@ -16,6 +16,10 @@ class BinarySearchTree
     else
       node = @root
       last_node = @root
+
+
+
+
     end
   end
 end
