@@ -6,14 +6,14 @@ require './lib/tree_node'
 class BinarySearchTree
   attr_accessor :root, :depth, :size
 
-  def initialize()
+  def initialize
     @root = nil
     @depth = 0
     @size = 0
   end
 
   def insert(score, title)
-    if @root == nil
+    if @root.nil?
       @root = TreeNode.new(score, title)
       @size += 1
       @depth
@@ -23,7 +23,7 @@ class BinarySearchTree
       @depth = 0
 
       # find the appropriate nil node
-      while node != nil
+      until node.nil?
         if score < node.score
           parent_node = node
           node = node.left
@@ -48,8 +48,23 @@ class BinarySearchTree
       end
     end
   end
-end # BST Class End
 
+  def include?(score = nil)
+    return false if @root.nil?
+
+    node = @root
+    until node.nil?
+      if score < node.score
+        node = node.left
+      elsif score > node.score
+        node = node.right
+      elsif score == node.score
+        return true
+      end
+    end
+    false
+  end
+end
 
 # tree = BinarySearchTree.new
 # tree.insert(50, 'Hannibal Buress: Animal Furnace')

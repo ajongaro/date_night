@@ -85,4 +85,36 @@ RSpec.describe BinarySearchTree do
     end
 
   end
+
+  describe '#include?' do
+    it 'returns true or false' do
+      expect(tree.include?).to be(true).or be(false)
+    end
+
+    it 'finds a score at root' do
+      tree.insert(50, 'Hannibal')
+      expect(tree.include?(50)).to be true
+    end
+
+    it 'returns true for a score at depth: 4' do
+      tree.insert(50, 'Hannibal')
+      tree.insert(32, 'Police Academy')
+      tree.insert(10, 'GIGLi')
+      tree.insert(60, 'Sharknado')
+      tree.insert(55, 'TMNT: 2')
+      tree.insert(1, 'Batman')
+      tree.insert(3, 'Spice World')
+
+      expect(tree.include?(3)).to be true
+    end
+
+    it 'returns false for no matching score' do
+      tree.insert(50, 'Hannibal')
+      tree.insert(32, 'Police Academy')
+      tree.insert(10, 'GIGLi')
+      tree.insert(60, 'Sharknado')
+
+      expect(tree.include?(11)).to be false
+    end
+  end
 end
