@@ -2,12 +2,13 @@
 
 require './lib/tree_node'
 
-# BST structure
+# Building a BST
 class BinarySearchTree
   attr_accessor :root, :depth, :size
 
   def initialize()
     @root = nil
+    @depth = 0
     @size = 0
   end
 
@@ -15,10 +16,10 @@ class BinarySearchTree
     if @root == nil
       @root = TreeNode.new(score, title)
       @size += 1
+      @depth
     else
       node = @root
       parent_node = node
-      @direction = nil
       @depth = 0
 
       # find the appropriate nil node
@@ -29,7 +30,7 @@ class BinarySearchTree
         elsif score > node.score
           parent_node = node
           node = node.right
-        else
+        elsif score == node.score
           return 'Score already exists.'
         end
         @depth += 1
@@ -39,11 +40,11 @@ class BinarySearchTree
       if score < parent_node.score
         parent_node.left = TreeNode.new(score, title)
         @size += 1
+        @depth
       elsif score > parent_node.score
         parent_node.right = TreeNode.new(score, title)
         @size += 1
-      else
-        return 'Scoring error.'
+        @depth
       end
     end
   end

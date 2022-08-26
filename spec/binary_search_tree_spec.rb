@@ -51,7 +51,7 @@ RSpec.describe BinarySearchTree do
       expect(tree.root.left.title).to eq('Police Academy')
     end
 
-    it 'has a depth of 2 when appropriate' do
+    it 'has a depth of 2 when depth is 2' do
       tree.insert(50, 'Hannibal')
       tree.insert(32, 'Police Academy')
       tree.insert(10, 'GIGLi')
@@ -60,7 +60,7 @@ RSpec.describe BinarySearchTree do
       expect(tree.size).to eq(3)
     end
 
-    it 'goes deep' do
+    it 'goes 4 levels deep' do
       tree.insert(50, 'Hannibal')
       tree.insert(32, 'Police Academy')
       tree.insert(10, 'GIGLi')
@@ -71,6 +71,17 @@ RSpec.describe BinarySearchTree do
 
       expect(tree.depth).to eq(4)
       expect(tree.size).to eq(7)
+    end
+
+    it 'returns depth of insertion' do
+      expect(tree.insert(50, 'Hannibal')).to eq(0)
+      expect(tree.insert(32, 'Police Academy')).to eq(1)
+      expect(tree.insert(10, 'GIGLi')).to eq(2)
+    end
+
+    it 'fails if score exists' do
+      tree.insert(50, 'Hannibal')
+      expect(tree.insert(50, 'Hannibal')).to eq('Score already exists.')
     end
 
   end
