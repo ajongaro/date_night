@@ -32,7 +32,6 @@ RSpec.describe BinarySearchTree do
 
     it 'adds two scores and titles' do
       tree.insert(50, 'Hannibal Buress: Animal Furnace')
-
       expect(tree.root.score).to eq(50)
       expect(tree.root.title).to eq('Hannibal Buress: Animal Furnace')
 
@@ -61,7 +60,18 @@ RSpec.describe BinarySearchTree do
       expect(tree.size).to eq(3)
     end
 
+    it 'goes deep' do
+      tree.insert(50, 'Hannibal')
+      tree.insert(32, 'Police Academy')
+      tree.insert(10, 'GIGLi')
+      tree.insert(60, 'Sharknado')
+      tree.insert(55, 'TMNT: 2')
+      tree.insert(1, 'Batman')
+      tree.insert(3, 'Spice World')
 
+      expect(tree.depth).to eq(4)
+      expect(tree.size).to eq(7)
+    end
 
   end
 end
