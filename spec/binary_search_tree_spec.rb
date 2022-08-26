@@ -41,7 +41,7 @@ RSpec.describe BinarySearchTree do
       expect(tree.root.left).to eq(nil)
     end
 
-    it 'adds a lesser score title in left node of root' do
+    it 'adds a lesser score in @roots left node' do
       tree.insert(50, 'Hannibal Buress: Animal Furnace')
       expect(tree.root.score).to eq(50)
       expect(tree.root.title).to eq('Hannibal Buress: Animal Furnace')
@@ -115,6 +115,26 @@ RSpec.describe BinarySearchTree do
       tree.insert(60, 'Sharknado')
 
       expect(tree.include?(11)).to be false
+    end
+  end
+
+  describe '#depth_of' do
+    it 'returns the depth of a node' do
+      tree.insert(50, 'Hannibal')
+      tree.insert(32, 'Police Academy')
+      tree.insert(10, 'GIGLi')
+      tree.insert(60, 'Sharknado')
+      tree.insert(55, 'TMNT: 2')
+      tree.insert(1, 'Batman')
+      tree.insert(3, 'Spice World')
+
+      expect(tree.depth_of(3)).to eq(4)
+    end
+
+    it 'returns 0 for root node depth' do
+      tree.insert(50, 'Hannibal')
+
+      expect(tree.depth_of(50)).to eq(0)
     end
   end
 end
