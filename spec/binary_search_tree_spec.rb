@@ -137,4 +137,18 @@ RSpec.describe BinarySearchTree do
       expect(tree.depth_of(50)).to eq(0)
     end
   end
+
+  describe '#max' do
+    it 'returns the highest value as key/value pair' do
+      tree.insert(50, 'Hannibal')
+      tree.insert(32, 'Police Academy')
+      tree.insert(10, 'GIGLi')
+      tree.insert(60, 'Sharknado')
+      tree.insert(55, 'TMNT: 2')
+      tree.insert(1, 'Batman')
+      tree.insert(3, 'Spice World')
+
+      expect(tree.max).to eq({ 'Sharknado' => 60 })
+    end
+  end
 end

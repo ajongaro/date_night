@@ -67,6 +67,7 @@ class BinarySearchTree
 
   def depth_of(score)
     return 0 if score == @root.score
+
     node = @root
     @depth = 0
     until node.nil?
