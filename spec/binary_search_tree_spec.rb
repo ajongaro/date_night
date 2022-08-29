@@ -185,4 +185,45 @@ RSpec.describe BinarySearchTree do
       expect(tree.min).to be(nil)
     end
   end
+
+  describe '#sort' do
+    it 'returns an array of key/value pairs' do
+      tree.insert(50, 'Hannibal')
+      tree.insert(32, 'Police Academy')
+      tree.insert(10, 'GIGLi')
+      tree.insert(57, 'Dumb Movie')
+      tree.insert(60, 'Sharknado')
+      tree.insert(55, 'TMNT: 2')
+      tree.insert(1, 'Batman')
+      tree.insert(3, 'Spice World')
+
+      expect(tree.sort).to eq(
+        [{ 'Batman' => 1},
+        { 'Spice World' => 3},
+        { 'GIGLi' => 10 },
+        { 'Police Academy' => 32 },
+        { 'Hannibal' => 50 },
+        { 'TMNT: 2' => 55 },
+        { 'Dumb Movie' => 57 },
+        { 'Sharknado' => 60 }]
+      )
+    end
+  end
+
+  describe '#load' do
+    it 'populates array from text file' do
+      tree.load('movies2.txt')
+
+      expect(tree.root.score).to eq(71)
+      expect(tree.root.title).to eq('Hannibal Buress: Animal Furnace')
+      expect(tree.root.left.title).to eq('Meet My Valentine')
+      expect(tree.root.right.title).to eq('Hannibal Buress: Comedy Camisado')
+      expect(tree.root.left.right.score).to eq(55)
+    end
+
+    it 'returns size of tree after loading' do
+      expect(tree.load('movies.txt')).to eq(100)
+    end
+  end
+
 end
