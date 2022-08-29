@@ -13,12 +13,12 @@ class BinarySearchTree
   end
 
   def insert(score, title)
-    if @root.nil?
+    if root.nil?
       @root = TreeNode.new(score, title)
       @size += 1
-      @depth
+      depth
     else
-      node = @root
+      node = root
       parent_node = node
       @depth = 0
 
@@ -40,19 +40,19 @@ class BinarySearchTree
       if score < parent_node.score
         parent_node.left = TreeNode.new(score, title)
         @size += 1
-        @depth
+        depth
       elsif score > parent_node.score
         parent_node.right = TreeNode.new(score, title)
         @size += 1
-        @depth
+        depth
       end
     end
   end
 
   def include?(score = nil)
-    return false if @root.nil?
+    return false if root.nil?
 
-    node = @root
+    node = root
     until node.nil?
       if score < node.score
         node = node.left
@@ -66,9 +66,9 @@ class BinarySearchTree
   end
 
   def depth_of(score)
-    return 0 if score == @root.score
+    return 0 if score == root.score
 
-    node = @root
+    node = root
     @depth = 0
     until node.nil?
       if score < node.score
@@ -76,25 +76,41 @@ class BinarySearchTree
       elsif score > node.score
         node = node.right
       elsif score == node.score
-        return @depth
+        return depth
       end
       @depth += 1
     end
-    @depth
+    depth
   end
 
   def max
-    return nil if @root.nil?
-    node = @root
-    max = nil
-    while max.nil?
+    return nil if root.nil?
+
+    node = root
+    result = nil
+    while result.nil?
       if node.right.nil?
-        max = node
+        result = node
       else
         node = node.right
       end
     end
-    {max.title => max.score}
+    {result.title => result.score}
+  end
+
+  def min
+    return nil if root.nil?
+
+    node = root
+    result = nil
+    while result.nil?
+      if node.left.nil?
+        result = node
+      else
+        node = node.left
+      end
+    end
+    {result.title => result.score}
   end
 end
 

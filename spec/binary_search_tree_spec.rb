@@ -139,7 +139,7 @@ RSpec.describe BinarySearchTree do
   end
 
   describe '#max' do
-    it 'returns the highest value as key/value pair' do
+    it 'returns the highest score as key/value pair' do
       tree.insert(50, 'Hannibal')
       tree.insert(32, 'Police Academy')
       tree.insert(10, 'GIGLi')
@@ -159,6 +159,30 @@ RSpec.describe BinarySearchTree do
 
     it 'returns nil when nothing exists' do
       expect(tree.max).to be(nil)
+    end
+  end
+
+  describe '#min' do
+    it 'returns the lowest score as key/value pair' do
+      tree.insert(50, 'Hannibal')
+      tree.insert(32, 'Police Academy')
+      tree.insert(10, 'GIGLi')
+      tree.insert(60, 'Sharknado')
+      tree.insert(55, 'TMNT: 2')
+      tree.insert(1, 'Batman')
+      tree.insert(3, 'Spice World')
+
+      expect(tree.min).to eq({ 'Batman' => 1 })
+    end
+
+    it 'returns root when only root exists' do
+      tree.insert(50, 'Hannibal')
+
+      expect(tree.min).to eq({ 'Hannibal' => 50 })
+    end
+
+    it 'returns nil when nothing exists' do
+      expect(tree.min).to be(nil)
     end
   end
 end
