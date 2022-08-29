@@ -150,5 +150,15 @@ RSpec.describe BinarySearchTree do
 
       expect(tree.max).to eq({ 'Sharknado' => 60 })
     end
+
+    it 'returns root when only root exists' do
+      tree.insert(50, 'Hannibal')
+
+      expect(tree.max).to eq({ 'Hannibal' => 50 })
+    end
+
+    it 'returns nil when nothing exists' do
+      expect(tree.max).to be(nil)
+    end
   end
 end

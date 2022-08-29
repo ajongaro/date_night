@@ -2,5 +2,6 @@
 /coverage.data
 /coverage/
 
-# Ignore sandbox file
+# Ignore sandbox files
 auxilary.rb
+scratch_pad.md
