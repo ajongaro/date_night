@@ -82,6 +82,20 @@ class BinarySearchTree
     end
     @depth
   end
+
+  def max
+    return nil if @root.nil?
+    node = @root
+    max = nil
+    while max.nil?
+      if node.right.nil?
+        max = node
+      else
+        node = node.right
+      end
+    end
+    {max.title => max.score}
+  end
 end
 
 # tree = BinarySearchTree.new
