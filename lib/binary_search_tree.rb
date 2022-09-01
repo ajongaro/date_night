@@ -115,7 +115,7 @@ class BinarySearchTree
   end
 
   def sort
-    @inorder_list = []
+    @inorder_list.clear
     traverse(root)
     @inorder_list
   end
@@ -123,9 +123,9 @@ class BinarySearchTree
   # I understand about 90% of why this works 8/30/22
   def traverse(node)
     if !node.nil?
-      traverse(node.left)
-      @inorder_list << {node.title => node.score}
-      traverse(node.right)
+      traverse(node.left) #left
+      @inorder_list << {node.title => node.score} #visit
+      traverse(node.right) #right
     end
   end
 
