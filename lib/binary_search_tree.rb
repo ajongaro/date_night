@@ -11,6 +11,7 @@ class BinarySearchTree
     @depth = 0
     @size = 0
     @inorder_list = []
+    @times_recursed = 0
   end
 
   def insert(score, title)
@@ -120,13 +121,22 @@ class BinarySearchTree
     @inorder_list
   end
 
-  # I understand about 90% of why this works 8/30/22
+  # I understand about 98% of why this works 8/30/22
   def traverse(node)
+    @times_recursed += 1
     if !node.nil?
+      print "At #{node.score}, going left.\n"
       traverse(node.left) #left
       @inorder_list << {node.title => node.score} #visit
+      print "Added #{{node.title => node.score}}, going right.\n"
       traverse(node.right) #right
     end
+    if node.nil?
+      print "At nil node, going back.\n"
+    else
+      print "On node #{node.score}.\n"
+    end
+    print "*LOOP* [#{@times_recursed} method calls]\n"
   end
 
   def load(movie_list)
@@ -148,6 +158,8 @@ class BinarySearchTree
 end
 
 # tree = BinarySearchTree.new
+# # tree.load('movies3.txt')
+#
 # tree.insert(50, 'Hannibal Buress: Animal Furnace')
 # tree.insert(61, "Bill & Ted's Excellent Adventure")
 # tree.insert(32, 'Police Academy')
@@ -156,5 +168,6 @@ end
 # tree.insert(55, 'TMNT: 2')
 # tree.insert(1, 'Batman')
 # tree.insert(3, 'Spice World')
-#
+
+# tree.sort
 # tree.pretty_print
