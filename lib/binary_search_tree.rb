@@ -4,25 +4,20 @@ require './lib/tree_node'
 
 # Building a BST
 class BinarySearchTree
-  attr_accessor :root, :depth, :size
+  attr_accessor :root, :depth
 
   def initialize
     @root = nil
-    @depth = 0
-    @size = 0
-    @inorder_list = []
-    @times_recursed = 0
   end
 
   def insert(score, title)
+    depth = 0
     if !root
       @root = TreeNode.new(score, title)
-      self.size += 1
       depth
     else
       node = root
       parent_node = node
-      self.depth = 0
 
       # find the appropriate nil node
       until !node
@@ -35,19 +30,20 @@ class BinarySearchTree
         elsif score == node.score
           return 'Score already exists.'
         end
-        self.depth += 1
+        depth += 1
       end
 
       # add new node in nil spot
-      if score < parent_node.score
-        parent_node.left = TreeNode.new(score, title)
-        self.size += 1
-        depth
-      elsif score > parent_node.score
-        parent_node.right = TreeNode.new(score, title)
-        self.size += 1
-        depth
-      end
+      add_new_node(score, title, parent_node)
+      depth
+    end
+  end
+
+  def add_new_node(score, title, parent_node)
+    if score < parent_node.score
+      parent_node.left = TreeNode.new(score, title)
+    elsif score > parent_node.score
+      parent_node.right = TreeNode.new(score, title)
     end
   end
 
@@ -71,7 +67,7 @@ class BinarySearchTree
     return 0 if score == root.score
 
     node = root
-    self.depth = 0
+    depth = 0
     until !node
       if score < node.score
         node = node.left
@@ -80,7 +76,7 @@ class BinarySearchTree
       elsif score == node.score
         return depth
       end
-      self.depth += 1
+      depth += 1
     end
     depth
   end
@@ -115,30 +111,31 @@ class BinarySearchTree
     {result.title => result.score}
   end
 
+  def size
+    sort.count
+  end
+
+    # write a method for this
+  def depth
+
+  end
+
+  # uses recursive inorder traversal to sort the list
   def sort
-    @inorder_list.clear
+    @inorder_list = []
     traverse(root)
     @inorder_list
   end
 
-  # I understand about 98% of why this works 8/30/22
   def traverse(node)
-    @times_recursed += 1
-    if !node.nil?
-      print "At #{node.score}, going left.\n"
+    if node
       traverse(node.left) #left
-      @inorder_list << {node.title => node.score} #visit
-      print "Added #{{node.title => node.score}}, going right.\n"
+      @inorder_list << {node.title => node.score} #record
       traverse(node.right) #right
     end
-    if node.nil?
-      print "At nil node, going back.\n"
-    else
-      print "On node #{node.score}.\n"
-    end
-    print "*LOOP* [#{@times_recursed} method calls]\n"
   end
 
+  # loads a list from a text file
   def load(movie_list)
     size = 0
     File.readlines(movie_list, chomp: true).each do |x|
@@ -149,25 +146,23 @@ class BinarySearchTree
     size
   end
 
-  # this is copied from Odin Project, I understand 85% of it 8/30/22
-  def pretty_print(node = @root, prefix = '', is_left = true)
-    pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
-    puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.score}, #{node.title}"
-    pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
+  def health(level)
+    node_result = []
+    level_result = []
+
+    # take level as argument (0 - n)
+
+    # find first node at that level
+    # note the score as array[0]
+    # traverse the tree below that node
+    # note that count + 1 as array[1]
+    # divide that count over total number of nodes
+    # note that result as array[2]
+
+    # add that array to the result array
+
+    # repeat for any other nodes at depth level
+    # return result array
+
   end
 end
-
-# tree = BinarySearchTree.new
-# # tree.load('movies3.txt')
-#
-# tree.insert(50, 'Hannibal Buress: Animal Furnace')
-# tree.insert(61, "Bill & Ted's Excellent Adventure")
-# tree.insert(32, 'Police Academy')
-# tree.insert(10, 'GIGLi')
-# tree.insert(60, 'Sharknado')
-# tree.insert(55, 'TMNT: 2')
-# tree.insert(1, 'Batman')
-# tree.insert(3, 'Spice World')
-
-# tree.sort
-# tree.pretty_print

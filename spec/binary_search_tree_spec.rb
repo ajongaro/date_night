@@ -226,4 +226,12 @@ RSpec.describe BinarySearchTree do
     end
   end
 
+  describe '#health' do
+    it 'returns score of the node' do
+      tree.load('movies2.txt')
+
+      expect(tree.health(0)[0][0]).to eq(71)
+    end
+  end
+
 end
